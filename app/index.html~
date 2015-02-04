@@ -13,7 +13,6 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/chosen.main.css">
     <!-- endbuild -->
   </head>
   <body>
@@ -30,14 +29,14 @@
       <label class="libre" for="telefono">Telefono:<span class="error">*</span>
         <input id="telefono" type="text" name="telefono"/>
       </label>
-      <label class="largo" for="email">Email:<span class="error">*</span>
+      <label for="email">Email:<span class="error">*</span>
         <input  id="email" type="email"  name="email"/>
       </label>
-      <label class="largo" for="email2">Repetir Email:
+      <label for="email2">Repetir Email:
         <input  id="email2" type="email" name="email2"/>
       </label>
       <label class="libre" for="conoc">¿Como nos has conocido?
-        <select  id="contact" class="prueba chosen-select">
+        <select  id="contact" class="prueba">
           <option></option>
           <option>Prefiero no contestar</option>
           <option>Publicidad</option>
@@ -77,10 +76,8 @@
         <input id="provincia" type="text" name="provincia"/>
       </label>
       <label for="pais">Pais:<span class="error">*</span>
-          <select name="pais" id="pais" ></select>
-        
+        <input id="pais" type="text"  value="España" name="pais"/>
       </label>
-     
       <label class="libre largo" for="iban">Código IBAN:<span class="error">*</span>
         <input id="iban" type="text" name="iban"/>
       </label>
@@ -105,9 +102,6 @@
       </label>
       <label for="pass2">Repetir Contraseña:
         <input id="pass2" type="password" name="pass2"/>
-      </label>
-      <label  for="BarraPass">Complejidad de contraseña
-          <meter value="0" id="BarraPass" min="0" max="40"></meter>
       </label>
     </fieldset>
     <div>

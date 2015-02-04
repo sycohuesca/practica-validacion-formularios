@@ -80,3 +80,9 @@ label.largo input{
 em {
 	margin:80px;
 }
+meter{
+    color: red;
+ margin-left: 30px;
+    margin-top: 4px;
+    height: 25px
+}	

@@ -1,4 +1,9 @@
-// validar el formulario
+// Cargamos la lista de paises el en select.
+$("#pais").load("php/pais.php").done(console.log("Paises cargados con exito."));
+// aplicamos a un select el plugin chosen.
+$("#contact").chosen({disable_search_threshold: 10});
+
+// Aqui vamos a validar nuestro formulario.
 
 $("#miformulario").validate({
    rules:{
@@ -21,10 +26,12 @@ $("#miformulario").validate({
         required:true,
         remote:"php/validar_nif.php",
         nif:function(){
+            // Si el demandante es un particular se comprueba si el nif tiene el formato correcto.
             if ($("#particular").is(":checked")){
+               $('#nif_cif').val().toUpperCase();
             return "nif";
         }
-        }
+    }
     },
     nom_emp:"required",
     direccion:"required",
@@ -38,7 +45,7 @@ $("#miformulario").validate({
     pais:"required",
     iban:{
         required:true,
-        iban:"iban"
+        iban:"iban"   // Se comprueba el codigo IBAN es valido.
     },
     usuario:{
         required:true,
@@ -46,16 +53,14 @@ $("#miformulario").validate({
     },
     pass:{
         required:true,
-        minlength:6
+        minlength:6  
     },
     pass2:{
         required:true,
         equalTo:"#pass"
     }
-    
-   },
-   
-           
+      },
+   // Una vez completado y no hay errores se envia el mensaje para aceptar.
     submitHandler : function() {
         var nombre=$("#nombre").val();
         var cuota=$("input[name='pago']:checked").val();
@@ -68,9 +73,12 @@ $("#miformulario").validate({
             }
 				}
 });
-
-
-
+// Metodo que gestiona la complexidad del password.
+ $("#pass").focusin(function () {
+            $("#pass").complexify({}, function (valid, complexity) {
+                $("#BarraPass").attr("value",complexity);
+                            });
+        });
  // Metodo para rellenar el zip con ceros a la izquierda.
 function rellenar (){
         var zip = $("#zip").val();
@@ -82,7 +90,7 @@ function rellenar (){
         $("#zip").val(zip);
         return zip;
        };
-       
+       // Metodo que actualiza el label segun proceda.
        function demandante_nombre(){
             $("#lab_nom").text("Nombre:");  
           $("#lab_nif").text("Nif:"); 
@@ -90,10 +98,7 @@ function rellenar (){
         $("#nom_emp").val(nuevo_nombre);
          $("#nom_emp").prop("disabled","false"); 
        };
-
-
-
-// buscamos el municipio y la localidad.
+// buscamos el municipio y la localidad y los rellenamos.
 $("#zip").focusout(function() {
   var zip=rellenar();
         var promesa = $.ajax({
@@ -108,7 +113,6 @@ $("#zip").focusout(function() {
     });
     promesa.fail(function() {
         console.log("Fallo al importar los datos");
-
     });
 });
 // Rellenar con el nombre y apellido si es particular
@@ -116,8 +120,7 @@ $("#apellido").focusout(function (){
    if ($("#particular").is(":checked")){
           demandante_nombre();
       }
-      });
-    
+      });  
    // Segun el demandante cambiamos los label.
    
       $("#deman").change(function (){
@@ -131,10 +134,6 @@ $("#apellido").focusout(function (){
                     demandante_nombre();
       }
                   });
-
-
-    
-
     //RELLENAR EL CAMPO USUARIO este campo no se puede modificar
 
     $("#email").focusout(function() {
@@ -142,7 +141,7 @@ var email=$("#email").val();
         $("#usuario").val(email);
         $("#usuario").prop("disabled","false");
     });
-   
+   // Añade el metodo comprobar el IBAN.
 jQuery.validator.addMethod("iban", function(value, element) {
 	// some quick simple tests to prevent needless work
 	if (this.optional(element)) {
@@ -261,12 +260,16 @@ jQuery.validator.addMethod("iban", function(value, element) {
     }
 	return cRest === 1;
 }, "Por favor, revisa tu cuenta IBAN");
+
+// Añade el metodo nif modificado incluyendo la letra mayusculas o minusculas.
 jQuery.validator.addMethod('nif', function(value, element) {
 	if(/^([0-9]{8})*[a-zA-Z]+$/.test(value)){
 		var numero = value.substr(0,value.length-1);
 		var let = value.substr(value.length-1,1);
 		numero = numero % 23;
 		var letra='TRWAGMYFPDXBNJZSQVHLCKET';
+                letra=letra.toUpperCase();
+                let=let.toUpperCase();
 		letra=letra.substring(numero,numero+1);
 		if (letra==let)
 		return true;
@@ -274,7 +277,7 @@ jQuery.validator.addMethod('nif', function(value, element) {
 	}
 }, 'Introduce un NIF válido.');
 
-// mensajes español.
+// mensajes de validacion español.
 (function ($) {
 	$.extend($.validator.messages, {
 		required: "Este campo es obligatorio.",
@@ -282,10 +285,9 @@ jQuery.validator.addMethod('nif', function(value, element) {
 		digits: "Por favor, escribe sólo dígitos.",
 		equalTo: "Por favor, escribe el mismo valor de nuevo.",
 		maxlength: $.validator.format("Por favor, no escribas más de {0} caracteres."),
-		minlength: $.validator.format("Por favor, no escribas menos de {0} caracteres."),
-		
-		
+		minlength: $.validator.format("Por favor, no escribas menos de {0} caracteres.")		
 	});
 }(jQuery));
+
 
 
