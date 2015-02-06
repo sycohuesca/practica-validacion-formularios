@@ -13,6 +13,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/chosen.min.css">
         <!-- endbuild -->
   </head>
   <body>
@@ -48,7 +49,8 @@
     </fieldset>
     <fieldset>
       <legend>Datos de facturación.</legend>
-      <label id="deman" class="libre todo" for="demandante">Demandante: <span class="error">*</span><br/>
+      <label id="deman" class="libre todo" for="demandante">Demandante: <span class="error">*</span>
+      <br/>
         <em>Particular
         <input type="radio" name="demandante" id="particular"  checked />
         </em> <em>Empresa
@@ -84,7 +86,7 @@
         <input id="iban" type="text" name="iban"/>
       </label>
       <label for="pago" class="libre todo ">Forma de pago: <span class="error">*</span><br/>
-          <div id="tipo_pago">
+          <span id="tipo_pago">
           <em>Mensual
         <input type="radio" name="pago" value="50"/>
         </em> <em>Trimestral
@@ -92,7 +94,7 @@
         </em> <em>Anual
         <input type="radio"  checked="true" name="pago" value="550"/>
         </em> </label>
-</div>
+         </span>
     </fieldset>
     <fieldset>
       <legend>Datos de acceso.</legend>
@@ -113,7 +115,8 @@
       <input type="reset" onclick="window.location.reload()" value="Restablecer"/>
       <input type="submit" name="enviar" value="Enviar"/>
     </div>
-    <div id="autor"><a href="https://github.com/sycohuesca/practica-validacion-formularios">Repositorio GitHub</a> By Armando Jiménez Lucea.</div>
+    <div id="autor"><a href="https://github.com/sycohuesca/practica-validacion-formularios">Repositorio GitHub</a> By Armando Jiménez Lucea.
+    </div>
   </form>
 </div>
 
@@ -122,6 +125,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/jquery-validate/dist/jquery.validate.js"></script>
     <script src="bower_components/jquery.complexify.js/jquery.complexify.js"></script>
+    <script src="bower_components/chosen-bower/chosen.jquery.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

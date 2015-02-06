@@ -8,8 +8,8 @@
 	$.fn.extend({
 		complexify: function(options, callback) {
 
-			var MIN_COMPLEXITY = 1; // 12 chars with Upper, Lower and Number
-			var MAX_COMPLEXITY = 2; //  25 chars, all charsets
+			var MIN_COMPLEXITY = 49; // 12 chars with Upper, Lower and Number
+			var MAX_COMPLEXITY = 120; //  25 chars, all charsets
 			var CHARSETS = [
 				// Commonly Used
 				////////////////////
@@ -113,8 +113,8 @@
 			];
 
 			var defaults = {
-				minimumChars: 1,
-				strengthScaleFactor: 10,
+				minimumChars: 8,
+				strengthScaleFactor: 1,
         bannedPasswords: window.COMPLEXIFY_BANLIST || [],
 				banMode: 'strict' // (strict|loose)
 			};
