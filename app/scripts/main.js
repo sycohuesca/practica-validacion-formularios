@@ -1,6 +1,6 @@
 // Cargamos la lista de paises el en select.
-$("#pais").load("php/pais.php").done(console.log("Paises cargados con exito."));
-// aplicamos a un select el plugin chosen.
+$("#pais").load("http://armandojimenez.infenlaces.com/dwec/TareaFormulario/php/pais.php");
+// Associamos a este select el plugin chosen.
 $("#contact").chosen({disable_search_threshold: 10});
 
 // Aqui vamos a validar nuestro formulario.
@@ -17,14 +17,14 @@ $("#miformulario").validate({
     },
     email:{
         required:true,
-        remote:'php/validar_email.php'
+        remote:'../php/validar_email.php'
     },
     email2:{
         equalTo:"#email"
     },
     nif_cif:{
         required:true,
-        remote:"php/validar_nif.php",
+        remote:"../php/validar_nif.php",
         nif:function(){
             // Si el demandante es un particular se comprueba si el nif tiene el formato correcto.
             if ($("#particular").is(":checked")){
@@ -102,7 +102,7 @@ function rellenar (){
 $("#zip").focusout(function() {
   var zip=rellenar();
         var promesa = $.ajax({
-        url: "php/datos.php",
+        url: "../php/datos.php",
         type: "GET",
         dataType: "json",
         data: {zip: zip}
@@ -288,6 +288,3 @@ jQuery.validator.addMethod('nif', function(value, element) {
 		minlength: $.validator.format("Por favor, no escribas menos de {0} caracteres.")		
 	});
 }(jQuery));
-
-
-
