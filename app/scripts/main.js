@@ -1,5 +1,11 @@
 // Cargamos la lista de paises el en select.
-$("#pais").load("http://armandojimenez.infenlaces.com/dwec/TareaFormulario/php/pais.php");
+ $("#pais").load("../php/pais.php");
+       
+      $("#nombre").focusin(function (){
+          $("#pais").chosen();
+          
+      });
+
 // Associamos a este select el plugin chosen.
 $("#contact").chosen({disable_search_threshold: 10});
 
